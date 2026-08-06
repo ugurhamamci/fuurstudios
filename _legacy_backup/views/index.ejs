@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FUUR STUDIO — Dijital Dönüşüm Ortağınız | Software & AI Solutions</title>
+  <meta name="description" content="FUUR STUDIO: İstanbul merkezli yazılım, AI ve dijital dönüşüm şirketi. Kurumsal web siteleri, e-ticaret, yapay zeka entegrasyonları ve sosyal medya yönetimi." />
+  
+  <title><%= settings.site_meta_title || 'FUUR STUDIO - Digital Agency' %></title>
+  <meta name="description" content="<%= settings.site_meta_description || 'Dijital dönüşüm ortağınız.' %>" />
+  
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════ -->
+  <nav class="nav" id="navbar">
+    <div class="nav__inner">
+      <!-- Logo -->
+      <a href="#" class="nav__logo" aria-label="FUUR STUDIO">
+        <img src="assets/logo-bw-2.png" data-logo-dark="assets/logo-bw-2.png" data-logo-light="assets/logo-bw-1.png" alt="FUUR STUDIO" class="nav__logo-img js-theme-logo" />
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="nav__links hide-mobile">
+        <a href="#services" class="nav__link" data-i18n="nav.services">Hizmetler</a>
+        <a href="#portfolio" class="nav__link" data-i18n="nav.portfolio">Projeler</a>
+        <a href="#about" class="nav__link" data-i18n="nav.about">Hakkımızda</a>
+        <a href="#team" class="nav__link" data-i18n="nav.team">Ekip</a>
+        <a href="#testimonials" class="nav__link" data-i18n="nav.testimonials">Yorumlar</a>
+        <a href="#blog" class="nav__link" data-i18n="nav.blog">Blog</a>
+        <a href="#contact" class="nav__link" data-i18n="nav.contact">İletişim</a>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav__actions">
+        <!-- Language Toggle -->
+        <div class="lang-toggle hide-mobile">
+          <button class="lang-toggle__option active" data-lang="tr">TR</button>
+          <button class="lang-toggle__option" data-lang="en">EN</button>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="toggle-btn" id="theme-toggle" aria-label="Tema değiştir">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+
+        <!-- CTA -->
+        <a href="#contact" class="btn btn--primary btn--sm hide-mobile" data-i18n="nav.cta">Projenizi Görüşelim</a>
+
+        <!-- Hamburger -->
+        <button class="nav__hamburger" aria-label="Menü">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="nav__mobile-menu">
+      <a href="#services" class="nav__link" data-i18n="nav.services">Hizmetler</a>
+      <a href="#portfolio" class="nav__link" data-i18n="nav.portfolio">Projeler</a>
+      <a href="#about" class="nav__link" data-i18n="nav.about">Hakkımızda</a>
+      <a href="#team" class="nav__link" data-i18n="nav.team">Ekip</a>
+      <a href="#testimonials" class="nav__link" data-i18n="nav.testimonials">Yorumlar</a>
+      <a href="#blog" class="nav__link" data-i18n="nav.blog">Blog</a>
+      <a href="#contact" class="nav__link" data-i18n="nav.contact">İletişim</a>
+      <div class="nav__mobile-actions">
+        <div class="lang-toggle">
+          <button class="lang-toggle__option active" data-lang="tr">TR</button>
+          <button class="lang-toggle__option" data-lang="en">EN</button>
+        </div>
+        <a href="#contact" class="btn btn--primary btn--sm" data-i18n="nav.cta">Projenizi Görüşelim</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+       ═══════════════════════════════════════════ -->
+  <section class="hero section--lg" id="hero">
+    <div class="container">
+      <div class="hero__content">
+        <span class="overline hero__overline" data-i18n="hero.overline">[ Dijital Dönüşüm Ortağınız ]</span>
+        <h1 class="hero__title">
+          <span data-i18n="hero.title.1">WEB SİTESİ DEĞİL,</span><br />
+          <span class="text-gradient" data-i18n="hero.title.2">DİJİTAL PRESTİJ</span><br />
+          <span data-i18n="hero.title.3">TASARLIYORUZ.</span>
+        </h1>
+        <p class="hero__description" data-i18n="hero.description">
+          Sıradan şablonlar değil, markanıza özel, yüksek dönüşüm oranlı ve performansa odaklanmış modern dijital deneyimler geliştiriyoruz.
+        </p>
+        <div class="hero__actions">
+          <a href="#services" class="btn btn--secondary btn--lg" data-i18n="hero.cta.primary">Hizmetlerimizi İnceleyin</a>
+          <a href="#contact" class="btn btn--ghost btn--lg" data-i18n="hero.cta.secondary">Bizimle İletişime Geçin</a>
+        </div>
+      </div>
+
+      <!-- Right Visual -->
+      <div class="hero__visual">
+        <div class="hero__visual-wrapper">
+          <div class="hero__visual-ring"></div>
+          <div class="hero__visual-ring-2"></div>
+          
+          <img src="assets/logo-full-white.png" data-logo-dark="assets/logo-full-white.png" data-logo-light="assets/logo-full.png" alt="FUUR STUDIO" class="hero__visual-logo js-theme-logo" />
+
+          <!-- Badges -->
+          <div class="hero__badge hero__badge--top-right">
+            <svg class="hero__badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span data-i18n="hero.badge.performance">Top Performance</span>
+          </div>
+
+          <div class="hero__badge hero__badge--bottom-left">
+            <svg class="hero__badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span data-i18n="hero.badge.ai">AI Integrated</span>
+          </div>
+
+          <div class="hero__badge hero__badge--bottom-right">
+            <svg class="hero__badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span data-i18n="hero.badge.design">Award Winning</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Strips -->
+      <div class="hero__bottom">
+        <div class="hero__tech-strip">
+          <span class="hero__tech-label" data-i18n="hero.tech.title">TECH STACK</span>
+          <div class="hero__tech-logos">
+            <div class="hero__tech-item">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.051 17.576l-4.524-4.524 1.414-1.414 3.11 3.11 7.293-7.293 1.414 1.414-8.707 8.707z"/></svg>
+              React & Next.js
+            </div>
+            <div class="hero__tech-item">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.051 17.576l-4.524-4.524 1.414-1.414 3.11 3.11 7.293-7.293 1.414 1.414-8.707 8.707z"/></svg>
+              Node.js
+            </div>
+            <div class="hero__tech-item">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.051 17.576l-4.524-4.524 1.414-1.414 3.11 3.11 7.293-7.293 1.414 1.414-8.707 8.707z"/></svg>
+              Python & AI Models
+            </div>
+            <div class="hero__tech-item">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.051 17.576l-4.524-4.524 1.414-1.414 3.11 3.11 7.293-7.293 1.414 1.414-8.707 8.707z"/></svg>
+              PostgreSQL
+            </div>
+            <div class="hero__tech-item">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.051 17.576l-4.524-4.524 1.414-1.414 3.11 3.11 7.293-7.293 1.414 1.414-8.707 8.707z"/></svg>
+              AWS & Cloud
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__metrics">
+          <div class="hero__metric">
+            <span class="hero__metric-value">250<span class="accent">+</span></span>
+            <span class="hero__metric-label" data-i18n="hero.metric.1">Projects</span>
+          </div>
+          <div class="hero__metric">
+            <span class="hero__metric-value">98<span class="accent">%</span></span>
+            <span class="hero__metric-label" data-i18n="hero.metric.2">Success Rate</span>
+          </div>
+          <div class="hero__metric">
+            <span class="hero__metric-value">24<span class="accent">/</span>7</span>
+            <span class="hero__metric-label" data-i18n="hero.metric.3">Support</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Background decorations -->
+    <div class="hero__bg">
+      <div class="orb orb--red hero__orb-1"></div>
+      <div class="orb orb--white hero__orb-2"></div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SERVICES SECTION
+       ═══════════════════════════════════════════ -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="section-header section-header--split reveal">
+        <div>
+          <span class="overline" data-i18n="services.overline">Neler Yapıyoruz?</span>
+          <h2 class="heading-lg" data-i18n="services.title">HİZMETLERİMİZ</h2>
+        </div>
+        <p class="body-sm" style="max-width: 380px;" data-i18n="services.subtitle">
+          İşletmenizi dijital dünyada konumlandırırken ihtiyacınız olan tüm teknik ve kreatif altyapıyı sağlıyoruz.
+        </p>
+      </div>
+
+      <div class="services__grid stagger-children">
+        <!-- Service 1 -->
+        <div class="card card--accent-hover reveal">
+          <span class="card__number">01 //</span>
+          <h3 class="card__title" data-i18n="services.1.title">Kurumsal Web Siteleri</h3>
+          <p class="card__description" data-i18n="services.1.desc">
+            Hızlı, modern, SEO ve mobil uyumlu, markanızın kalitesini ve niş yapısını yansıtan prestijli web siteleri tasarlıyoruz.
+          </p>
+          <span class="card__tags" data-i18n="services.1.tags">Next.js • Custom Design • SEO</span>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="card card--accent-hover reveal">
+          <span class="card__number">02 //</span>
+          <h3 class="card__title" data-i18n="services.2.title">E-Ticaret Çözümleri</h3>
+          <p class="card__description" data-i18n="services.2.desc">
+            Satış odaklı, güvenli ödeme altyapısına sahip, kullanıcı deneyimi en üst düzeyde tutulmuş online mağazalar geliştiriyoruz.
+          </p>
+          <span class="card__tags" data-i18n="services.2.tags">Secure • Scalable • Conversive</span>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="card card--accent-hover reveal">
+          <span class="card__number">03 //</span>
+          <h3 class="card__title" data-i18n="services.3.title">Yapay Zeka & Otomasyon</h3>
+          <p class="card__description" data-i18n="services.3.desc">
+            İş süreçlerinizi hızlandıran özel yazılımlar ve akıllı yapay zeka entegrasyonları ile operasyonel verimlilik sağlıyoruz.
+          </p>
+          <span class="card__tags" data-i18n="services.3.tags">AI Integrations • Workflow Automation</span>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="card card--accent-hover reveal">
+          <span class="card__number">04 //</span>
+          <h3 class="card__title" data-i18n="services.4.title">Sosyal Medya Yönetimi</h3>
+          <p class="card__description" data-i18n="services.4.desc">
+            Strateji, kreatif içerik üretimi ve Meta Ads reklam yönetimi ile markanızı doğru kitleye ulaştırıyoruz.
+          </p>
+          <span class="card__tags" data-i18n="services.4.tags">Strategy • Content • Ads Management</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PORTFOLIO SECTION
+       ═══════════════════════════════════════════ -->
+  <section class="portfolio section" id="portfolio">
+    <div class="container">
+      <div class="section-header section-header--split reveal">
+        <div>
+          <span class="overline" data-i18n="portfolio.overline">Çalışmalarımız</span>
+          <h2 class="heading-lg" data-i18n="portfolio.title">PROJELER</h2>
+        </div>
+        <p class="body-sm" style="max-width: 380px;" data-i18n="portfolio.subtitle">
+          Her projede markanın DNA'sını dijitale taşıyan, dönüşüm odaklı çözümler üretiyoruz.
+        </p>
+      </div>
+
+      <!-- Filters -->
+      <div class="portfolio__filters reveal">
+        <button class="portfolio__filter active" data-filter="all" data-i18n="portfolio.filter.all">Tümü</button>
+        <button class="portfolio__filter" data-filter="web" data-i18n="portfolio.filter.web">Web</button>
+        <button class="portfolio__filter" data-filter="ecommerce" data-i18n="portfolio.filter.ecommerce">E-Ticaret</button>
+        <button class="portfolio__filter" data-filter="mobile" data-i18n="portfolio.filter.mobile">Mobil</button>
+        <button class="portfolio__filter" data-filter="ai" data-i18n="portfolio.filter.ai">AI</button>
+      </div>
+
+      <!-- Grid -->
+      <div class="portfolio__grid stagger-children" id="portfolio-grid">
+        <% projects.forEach(function(p) { %>
+          <% let catText = p.category === 'web' ? 'Web Sitesi' : (p.category === 'ecommerce' ? 'E-Ticaret' : (p.category === 'mobile' ? 'Mobil Uygulama' : 'AI Çözümleri')); %>
+          <div class="portfolio__item reveal" data-category="<%= p.category %>">
+            <img src="<%= p.image %>" alt="<%= p.title %>" class="portfolio__image" loading="lazy" />
+            <div class="portfolio__overlay">
+              <span class="portfolio__category"><%= catText %></span>
+              <h3 class="portfolio__title"><%= p.title %></h3>
+              <p class="portfolio__desc"><%= p.description %></p>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT SECTION
+       ═══════════════════════════════════════════ -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <!-- Text Side -->
+        <div class="about__text reveal-left">
+          <span class="overline" data-i18n="about.overline">Biz Kimiz?</span>
+          <h2 class="heading-lg" data-i18n="about.title">HAKKIMIZDA</h2>
+          <p data-i18n="about.p1">
+            FUUR STUDIO olarak, İstanbul merkezli bir yazılım ve dijital dönüşüm şirketiyiz. Amacımız sadece web sitesi yapmak değil; markanızın dijital dünyada hak ettiği prestiji inşa etmektir.
+          </p>
+          <p data-i18n="about.p2">
+            Her projemizde performans, estetik ve dönüşüm üçgeninde mükemmelliği hedefliyoruz. Şablon çözümler yerine, markanıza özel tasarlanmış dijital deneyimler sunuyoruz.
+          </p>
+          <p data-i18n="about.p3">
+            Yapay zeka entegrasyonları, özel yazılım geliştirme ve sosyal medya stratejileri ile işletmelerin dijital olgunluğunu bir üst seviyeye taşıyoruz.
+          </p>
+        </div>
+
+        <!-- Metrics Side -->
+        <div class="metrics reveal-right">
+          <div class="metric">
+            <div class="metric__value" data-count="250" data-suffix="+">0</div>
+            <div class="metric__label" data-i18n="metric.projects">Tamamlanan Proje</div>
+          </div>
+          <div class="metric">
+            <div class="metric__value metric__value--white" data-count="98">0</div>
+            <div class="metric__label" data-i18n="metric.speed">Site Hız Skoru</div>
+          </div>
+          <div class="metric">
+            <div class="metric__value metric__value--white" data-count="98" data-prefix="%" >0</div>
+            <div class="metric__label" data-i18n="metric.satisfaction">Müşteri Memnuniyeti</div>
+          </div>
+          <div class="metric">
+            <div class="metric__value metric__value--white" data-count="5" data-suffix="+">0</div>
+            <div class="metric__label" data-i18n="metric.experience">Yıllık Tecrübe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TEAM SECTION
+       ═══════════════════════════════════════════ -->
+  <section class="team section" id="team">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="overline" data-i18n="team.overline">Arkamızdaki Güç</span>
+        <h2 class="heading-lg" data-i18n="team.title">EKİBİMİZ</h2>
+        <p class="body-base" style="max-width: 500px;" data-i18n="team.subtitle">
+          Her biri alanında uzman, tutkulu profesyonellerden oluşan bir ekibiz.
+        </p>
+      </div>
+
+      <div class="team__grid stagger-children">
+        <!-- Member 1 -->
+        <div class="team__member reveal">
+          <div class="team__avatar" style="background: linear-gradient(135deg, var(--brand-red) 0%, #1a1a1a 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:1.5rem; font-family:var(--font-heading); width:80px; height:80px; border-radius:50%; margin:0 auto var(--space-5);">UY</div>
+          <h3 class="team__name" data-i18n="team.1.name">Uğur Yılmaz</h3>
+          <p class="team__role" data-i18n="team.1.role">Kurucu & Full-Stack Developer</p>
+          <p class="team__bio" data-i18n="team.1.bio">Dijital çözümler ve AI entegrasyonları konusunda uzman.</p>
+          <div class="team__socials">
+            <a href="https://www.instagram.com/fuurstudio/" target="_blank" class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://wa.me/905448508960" target="_blank" class="social-link" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="team__member reveal">
+          <div class="team__avatar" style="background: linear-gradient(135deg, #667eea 0%, #1a1a1a 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:1.5rem; font-family:var(--font-heading); width:80px; height:80px; border-radius:50%; margin:0 auto var(--space-5);">EK</div>
+          <h3 class="team__name" data-i18n="team.2.name">Elif Karaca</h3>
+          <p class="team__role" data-i18n="team.2.role">UI/UX Tasarımcı</p>
+          <p class="team__bio" data-i18n="team.2.bio">Kullanıcı odaklı, estetik ve işlevsel arayüzler tasarlıyor.</p>
+          <div class="team__socials">
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="team__member reveal">
+          <div class="team__avatar" style="background: linear-gradient(135deg, #2dd4bf 0%, #1a1a1a 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:1.5rem; font-family:var(--font-heading); width:80px; height:80px; border-radius:50%; margin:0 auto var(--space-5);">BD</div>
+          <h3 class="team__name" data-i18n="team.3.name">Burak Demir</h3>
+          <p class="team__role" data-i18n="team.3.role">Backend Developer</p>
+          <p class="team__bio" data-i18n="team.3.bio">Ölçeklenebilir ve güvenli sunucu mimarileri kuruyor.</p>
+          <div class="team__socials">
+            <a href="#" class="social-link" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="team__member reveal">
+          <div class="team__avatar" style="background: linear-gradient(135deg, #f59e0b 0%, #1a1a1a 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:1.5rem; font-family:var(--font-heading); width:80px; height:80px; border-radius:50%; margin:0 auto var(--space-5);">SA</div>
+          <h3 class="team__name" data-i18n="team.4.name">Selin Aydın</h3>
+          <p class="team__role" data-i18n="team.4.role">Dijital Pazarlama Uzmanı</p>
+          <p class="team__bio" data-i18n="team.4.bio">Meta Ads ve sosyal medya stratejileri ile büyüme sağlıyor.</p>
+          <div class="team__socials">
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS SECTION
+       ═══════════════════════════════════════════ -->
+  <section class="testimonials section" id="testimonials">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="overline" data-i18n="testimonials.overline">Müşterilerimiz Ne Diyor?</span>
+        <h2 class="heading-lg" data-i18n="testimonials.title">YORUMLAR</h2>
+      </div>
+
+      <div class="testimonials__carousel reveal-scale">
+        <div class="testimonials__track">
+          <!-- Slide 1 -->
+          <div class="testimonials__slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__quote">"</div>
+              <div class="stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="testimonial-card__text" data-i18n="testimonial.1.text">
+                FUUR STUDIO ile çalışmak, dijital dünyada fark yaratmamızı sağladı. Web sitemizin performansı ve tasarımı beklentilerimizin çok üzerinde.
+              </p>
+              <div class="testimonial-card__author">
+                <div class="testimonial-card__avatar" style="background: linear-gradient(135deg, var(--brand-red), #333); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:600; font-size:0.875rem; width:48px; height:48px; border-radius:50%; border:2px solid var(--brand-red); flex-shrink:0;">AK</div>
+                <div class="testimonial-card__info">
+                  <p class="testimonial-card__name" data-i18n="testimonial.1.name">Ahmet Kaya</p>
+                  <p class="testimonial-card__company" data-i18n="testimonial.1.company">Meridian Architecture CEO</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="testimonials__slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__quote">"</div>
+              <div class="stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="testimonial-card__text" data-i18n="testimonial.2.text">
+                E-ticaret sitemizi sıfırdan tasarlayıp, satış oranlarımızı %180 artırdılar. Profesyonellik ve yaratıcılık bir arada.
+              </p>
+              <div class="testimonial-card__author">
+                <div class="testimonial-card__avatar" style="background: linear-gradient(135deg, #667eea, #333); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:600; font-size:0.875rem; width:48px; height:48px; border-radius:50%; border:2px solid var(--brand-red); flex-shrink:0;">ZÖ</div>
+                <div class="testimonial-card__info">
+                  <p class="testimonial-card__name" data-i18n="testimonial.2.name">Zeynep Öztürk</p>
+                  <p class="testimonial-card__company" data-i18n="testimonial.2.company">Vogue Boutique Kurucu</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="testimonials__slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__quote">"</div>
+              <div class="stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="testimonial-card__text" data-i18n="testimonial.3.text">
+                AI entegrasyonları sayesinde iş süreçlerimizi otomatize ettik. Zaman ve maliyet tasarrufu inanılmaz seviyede.
+              </p>
+              <div class="testimonial-card__author">
+                <div class="testimonial-card__avatar" style="background: linear-gradient(135deg, #2dd4bf, #333); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:600; font-size:0.875rem; width:48px; height:48px; border-radius:50%; border:2px solid var(--brand-red); flex-shrink:0;">MA</div>
+                <div class="testimonial-card__info">
+                  <p class="testimonial-card__name" data-i18n="testimonial.3.name">Murat Arslan</p>
+                  <p class="testimonial-card__company" data-i18n="testimonial.3.company">FinTrack CTO</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="testimonials__slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__quote">"</div>
+              <div class="stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="testimonial-card__text" data-i18n="testimonial.4.text">
+                Sosyal medya yönetiminde gösterdikleri strateji ve içerik kalitesi ile markamızın bilinirliğini 3 katına çıkardılar.
+              </p>
+              <div class="testimonial-card__author">
+                <div class="testimonial-card__avatar" style="background: linear-gradient(135deg, #f59e0b, #333); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:600; font-size:0.875rem; width:48px; height:48px; border-radius:50%; border:2px solid var(--brand-red); flex-shrink:0;">AÇ</div>
+                <div class="testimonial-card__info">
+                  <p class="testimonial-card__name" data-i18n="testimonial.4.name">Ayşe Çelik</p>
+                  <p class="testimonial-card__company" data-i18n="testimonial.4.company">NovaCare Pazarlama Müdürü</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="testimonials__nav">
+          <button class="testimonials__nav-btn" id="testimonial-prev" aria-label="Önceki">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="testimonials__nav-btn" id="testimonial-next" aria-label="Sonraki">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+
+        <!-- Dots -->
+        <div class="testimonials__dots">
+          <button class="testimonials__dot active" aria-label="Slide 1"></button>
+          <button class="testimonials__dot" aria-label="Slide 2"></button>
+          <button class="testimonials__dot" aria-label="Slide 3"></button>
+          <button class="testimonials__dot" aria-label="Slide 4"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       BLOG SECTION
+       ═══════════════════════════════════════════ -->
+  <section class="blog section" id="blog">
+    <div class="container">
+      <div class="section-header section-header--split reveal">
+        <div>
+          <span class="overline" data-i18n="blog.overline">İçeriklerimiz</span>
+          <h2 class="heading-lg" data-i18n="blog.title">BLOG</h2>
+        </div>
+        <p class="body-sm" style="max-width: 380px;" data-i18n="blog.subtitle">
+          Dijital dünyadan en güncel bilgiler, trendler ve stratejiler.
+        </p>
+      </div>
+
+      <div class="blog__grid stagger-children">
+        <!-- Blog 1 -->
+        <article class="blog-card reveal">
+          <div class="blog-card__image-wrapper">
+            <img src="assets/images/blog-1.jpg" alt="Web Tasarım Trendleri" class="blog-card__image" loading="lazy" />
+          </div>
+          <div class="blog-card__body">
+            <div class="blog-card__meta">
+              <span class="blog-card__category" data-i18n="blog.1.category">Web Tasarım</span>
+              <span class="blog-card__date" data-i18n="blog.1.date">5 Haziran 2026</span>
+            </div>
+            <h3 class="blog-card__title" data-i18n="blog.1.title">2026'da Web Tasarım Trendleri: Neler Değişiyor?</h3>
+            <p class="blog-card__excerpt" data-i18n="blog.1.excerpt">
+              Yapay zeka destekli tasarım, mikro-animasyonlar ve dark mode tercihleri ile web tasarımın geleceğini şekillendiren trendleri inceliyoruz.
+            </p>
+            <a href="#" class="blog-card__link" data-i18n="blog.readmore">
+              Devamını Oku
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Blog 2 -->
+        <article class="blog-card reveal">
+          <div class="blog-card__image-wrapper">
+            <img src="assets/images/blog-2.jpg" alt="AI KOBİ" class="blog-card__image" loading="lazy" />
+          </div>
+          <div class="blog-card__body">
+            <div class="blog-card__meta">
+              <span class="blog-card__category" data-i18n="blog.2.category">Yapay Zeka</span>
+              <span class="blog-card__date" data-i18n="blog.2.date">28 Mayıs 2026</span>
+            </div>
+            <h3 class="blog-card__title" data-i18n="blog.2.title">KOBİ'ler İçin AI: Küçük Bütçeyle Büyük Sonuçlar</h3>
+            <p class="blog-card__excerpt" data-i18n="blog.2.excerpt">
+              Yapay zeka artık sadece büyük şirketlerin tekelinde değil. KOBİ'lerin AI ile nasıl rekabet avantajı kazanabileceğini anlatıyoruz.
+            </p>
+            <a href="#" class="blog-card__link" data-i18n="blog.readmore">
+              Devamını Oku
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Blog 3 -->
+        <article class="blog-card reveal">
+          <div class="blog-card__image-wrapper">
+            <img src="assets/images/blog-3.jpg" alt="Meta Ads" class="blog-card__image" loading="lazy" />
+          </div>
+          <div class="blog-card__body">
+            <div class="blog-card__meta">
+              <span class="blog-card__category" data-i18n="blog.3.category">Dijital Pazarlama</span>
+              <span class="blog-card__date" data-i18n="blog.3.date">15 Mayıs 2026</span>
+            </div>
+            <h3 class="blog-card__title" data-i18n="blog.3.title">Meta Ads ile Dönüşüm Oranlarınızı Katlamak</h3>
+            <p class="blog-card__excerpt" data-i18n="blog.3.excerpt">
+              Doğru hedefleme, kreatif içerik ve A/B test stratejileri ile Meta reklamlarından maksimum verim almanın yollarını paylaşıyoruz.
+            </p>
+            <a href="#" class="blog-card__link" data-i18n="blog.readmore">
+              Devamını Oku
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT SECTION
+       ═══════════════════════════════════════════ -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="contact__grid">
+        <!-- Info Side -->
+        <div class="contact__info reveal-left">
+          <div>
+            <span class="overline" data-i18n="contact.overline">Bir Projeniz mi Var?</span>
+            <h2 class="heading-lg" data-i18n="contact.title">BİZE ULAŞIN</h2>
+            <p class="body-base" data-i18n="contact.description">
+              Projeleriniz, iş birlikleri veya detaylı bilgi almak için hemen bizimle iletişime geçin.
+            </p>
+          </div>
+
+          <div class="contact__details">
+            <!-- Phone -->
+            <div class="contact__detail">
+              <div class="contact__detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="contact__detail-text">
+                <span class="contact__detail-label" data-i18n="contact.phone.label">Telefon / WhatsApp</span>
+                <span class="contact__detail-value"><a href="tel:+905448508960">0544 850 89 60</a></span>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="contact__detail">
+              <div class="contact__detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="contact__detail-text">
+            <span class="contact__detail-label" data-i18n="contact.email.label">E-Posta</span>
+            <span class="contact__detail-value"><a href="mailto:<%= settings.email || 'info@fuurstudio.com' %>"><%= settings.email || 'info@fuurstudio.com' %></a></span>
+          </div>
+            </div>
+
+            <!-- Address -->
+            <div class="contact__detail">
+              <div class="contact__detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="contact__detail-text">
+                <span class="contact__detail-label" data-i18n="contact.address.label">Konum</span>
+                <span class="contact__detail-value" data-i18n="contact.address.value">İstanbul, Türkiye</span>
+              </div>
+            </div>
+
+            <!-- Social -->
+            <div class="contact__detail">
+              <div class="contact__detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </div>
+              <div class="contact__detail-text">
+                <span class="contact__detail-label" data-i18n="contact.social.label">Sosyal Medya</span>
+                <div class="social-links" style="margin-top: var(--space-2);">
+                  <a href="https://www.instagram.com/fuurstudio/" target="_blank" class="social-link" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  </a>
+                  <a href="https://wa.me/905448508960" target="_blank" class="social-link" aria-label="WhatsApp">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  </a>
+                  <a href="#" target="_blank" class="social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Side -->
+        <form class="contact__form reveal-right" id="contact-form">
+          <div class="contact__form-row">
+            <div class="form-group">
+              <label class="form-label" for="form-name" data-i18n="contact.form.name">Adınız Soyadınız</label>
+              <input class="form-input" type="text" id="form-name" required data-i18n-placeholder="contact.form.name" placeholder="Adınız Soyadınız" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="form-email" data-i18n="contact.form.email">E-posta Adresiniz</label>
+              <input class="form-input" type="email" id="form-email" required data-i18n-placeholder="contact.form.email" placeholder="E-posta Adresiniz" />
+            </div>
+          </div>
+
+          <div class="contact__form-row">
+            <div class="form-group">
+              <label class="form-label" for="form-phone" data-i18n="contact.form.phone">Telefon Numaranız</label>
+              <input class="form-input" type="tel" id="form-phone" data-i18n-placeholder="contact.form.phone" placeholder="Telefon Numaranız" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="form-service" data-i18n="contact.form.service">İlgilendiğiniz Hizmet</label>
+              <select class="form-select" id="form-service">
+                <option value="" data-i18n="contact.form.service.select">Hizmet Seçiniz</option>
+                <option value="Kurumsal Web Sitesi" data-i18n="contact.form.service.1">Kurumsal Web Sitesi</option>
+                <option value="E-Ticaret Çözümü" data-i18n="contact.form.service.2">E-Ticaret Çözümü</option>
+                <option value="Yapay Zeka & Otomasyon" data-i18n="contact.form.service.3">Yapay Zeka & Otomasyon</option>
+                <option value="Sosyal Medya Yönetimi" data-i18n="contact.form.service.4">Sosyal Medya Yönetimi</option>
+                <option value="Diğer" data-i18n="contact.form.service.5">Diğer</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-message" data-i18n="contact.form.message">Mesajınız</label>
+            <textarea class="form-textarea" id="form-message" required data-i18n-placeholder="contact.form.message.placeholder" placeholder="Projeniz hakkında kısaca bilgi verin..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--lg" data-i18n="contact.form.submit">
+            WhatsApp ile Gönder
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="#" class="nav__logo" aria-label="FUUR STUDIO">
+            <img src="assets/logo-horizontal-white.png" data-logo-dark="assets/logo-horizontal-white.png" data-logo-light="assets/logo-horizontal.png" alt="FUUR STUDIO" class="nav__logo-img js-theme-logo" />
+          </a>
+          <p data-i18n="footer.description">Dijital dönüşüm ortağınız. Yazılım, AI ve tasarım çözümleri ile markanızı bir adım öne taşıyoruz.</p>
+          <div class="social-links" style="margin-top: var(--space-6);">
+            <a href="https://www.instagram.com/fuurstudio/" target="_blank" class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://wa.me/905448508960" target="_blank" class="social-link" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+            <a href="#" target="_blank" class="social-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Services Col -->
+        <div>
+          <h4 class="footer__col-title" data-i18n="footer.col.services">Hizmetler</h4>
+          <div class="footer__links">
+            <a href="#services" class="footer__link" data-i18n="footer.link.web">Web Siteleri</a>
+            <a href="#services" class="footer__link" data-i18n="footer.link.ecommerce">E-Ticaret</a>
+            <a href="#services" class="footer__link" data-i18n="footer.link.ai">AI & Otomasyon</a>
+            <a href="#services" class="footer__link" data-i18n="footer.link.social">Sosyal Medya</a>
+          </div>
+        </div>
+
+        <!-- Company Col -->
+        <div>
+          <h4 class="footer__col-title" data-i18n="footer.col.company">Şirket</h4>
+          <div class="footer__links">
+            <a href="#about" class="footer__link" data-i18n="footer.link.about">Hakkımızda</a>
+            <a href="#team" class="footer__link" data-i18n="footer.link.team">Ekibimiz</a>
+            <a href="#blog" class="footer__link" data-i18n="footer.link.blog">Blog</a>
+            <a href="#" class="footer__link" data-i18n="footer.link.careers">Kariyer</a>
+          </div>
+        </div>
+
+        <!-- Connect Col -->
+        <div>
+          <h4 class="footer__col-title" data-i18n="footer.col.connect">İletişim</h4>
+          <div class="footer__links">
+            <a href="https://wa.me/905448508960" target="_blank" class="footer__link" data-i18n="footer.link.whatsapp">WhatsApp</a>
+            <a href="https://www.instagram.com/fuurstudio/" target="_blank" class="footer__link" data-i18n="footer.link.instagram">Instagram</a>
+            <a href="#" class="footer__link" data-i18n="footer.link.linkedin">LinkedIn</a>
+            <a href="mailto:info@fuurstudio.com" class="footer__link" data-i18n="footer.link.email">E-posta</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <div class="footer__bottom">
+        <p class="footer__copyright" data-i18n="footer.copyright">© 2026 FUUR STUDIO. Tüm hakları saklıdır.</p>
+        <button class="footer__scroll-top" id="scroll-top">
+          <span data-i18n="footer.scrolltop">Yukarı Çık</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    window.waNumber = "<%= settings.whatsappNumber || '905448508960' %>";
+  </script>
+  <script src="js/theme.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/testimonials.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+/* ============================================
+   FUUR STUDIO — Design Tokens
+   ============================================ */
+
+:root {
+  /* ── Brand Constants ── */
+  --brand-red: #C8102E;
+  --brand-red-hover: #E01535;
+  --brand-red-dark: #9B0C23;
+  --brand-red-glow: rgba(200, 16, 46, 0.15);
+  --brand-red-glow-strong: rgba(200, 16, 46, 0.3);
+
+  /* ── Spacing Scale (4px base) ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+
+  /* ── Typography Scale ── */
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs: clamp(0.7rem, 0.65rem + 0.2vw, 0.75rem);
+  --text-sm: clamp(0.8rem, 0.75rem + 0.2vw, 0.875rem);
+  --text-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+  --text-lg: clamp(1rem, 0.9rem + 0.4vw, 1.125rem);
+  --text-xl: clamp(1.15rem, 1rem + 0.5vw, 1.25rem);
+  --text-2xl: clamp(1.4rem, 1.1rem + 1vw, 1.5rem);
+  --text-3xl: clamp(1.7rem, 1.3rem + 1.5vw, 1.875rem);
+  --text-4xl: clamp(2rem, 1.5rem + 2vw, 2.25rem);
+  --text-5xl: clamp(2.5rem, 1.8rem + 3vw, 3rem);
+  --text-6xl: clamp(3rem, 2rem + 4vw, 3.75rem);
+  --text-7xl: clamp(3.5rem, 2.2rem + 5vw, 4.5rem);
+  --text-8xl: clamp(4rem, 2.5rem + 6vw, 6rem);
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.15em;
+
+  /* ── Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ── Motion ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+
+  /* ── Z-Index Scale ── */
+  --z-base: 1;
+  --z-dropdown: 10;
+  --z-sticky: 50;
+  --z-overlay: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+
+  /* ── Container ── */
+  --container-max: 1280px;
+  --container-narrow: 960px;
+  --container-wide: 1440px;
+  --container-padding: clamp(1.25rem, 3vw, 3rem);
+}
+
+/* ============================================
+   DARK THEME (Default)
+   ============================================ */
+[data-theme="dark"],
+:root {
+  --color-bg: #0A0A0A;
+  --color-bg-alt: #050505;
+  --color-surface: #111111;
+  --color-surface-hover: #161616;
+  --color-surface-elevated: #1A1A1A;
+  --color-border: #1E1E1E;
+  --color-border-hover: #2A2A2A;
+  --color-border-subtle: #141414;
+
+  --color-text: #F0F0F0;
+  --color-text-secondary: #999999;
+  --color-text-muted: #5A5A5A;
+  --color-text-inverse: #0A0A0A;
+
+  --color-accent: var(--brand-red);
+  --color-accent-hover: var(--brand-red-hover);
+  --color-accent-glow: var(--brand-red-glow);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 40px var(--brand-red-glow);
+  --shadow-glow-strong: 0 0 60px var(--brand-red-glow-strong);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(10, 10, 10, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-blur: blur(20px);
+}
+
+/* ============================================
+   LIGHT THEME
+   ============================================ */
+[data-theme="light"] {
+  --color-bg: #FAFAFA;
+  --color-bg-alt: #F5F5F5;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F8F8F8;
+  --color-surface-elevated: #FFFFFF;
+  --color-border: #E5E5E5;
+  --color-border-hover: #D0D0D0;
+  --color-border-subtle: #F0F0F0;
+
+  --color-text: #0A0A0A;
+  --color-text-secondary: #555555;
+  --color-text-muted: #999999;
+  --color-text-inverse: #FAFAFA;
+
+  --color-accent: var(--brand-red);
+  --color-accent-hover: var(--brand-red-hover);
+  --color-accent-glow: rgba(200, 16, 46, 0.1);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 40px rgba(200, 16, 46, 0.08);
+  --shadow-glow-strong: 0 0 60px rgba(200, 16, 46, 0.15);
+
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-blur: blur(20px);
+}

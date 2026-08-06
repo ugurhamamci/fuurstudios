@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FUUR STUDIO - Admin Paneli</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <!-- LOGIN -->
+  <div id="login-section" class="admin-login-container">
+    <div class="card admin-login-card">
+      <h2 class="heading-lg" style="margin-bottom: var(--space-6); text-align: center;">Yönetim Paneli</h2>
+      <form id="login-form" class="form-group">
+        <label class="form-label">Kullanıcı Adı</label>
+        <input type="text" id="username" class="form-input" required>
+        
+        <label class="form-label" style="margin-top: var(--space-4);">Şifre</label>
+        <input type="password" id="password" class="form-input" required>
+        
+        <p id="login-error" class="error-msg"></p>
+        
+        <button type="submit" class="btn btn--primary" style="margin-top: var(--space-6);">Giriş Yap</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard-section" class="admin-dashboard hidden">
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <h3>FUUR STUDIO</h3>
+        <p>Admin Paneli</p>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="sidebar-btn active" data-tab="settings">Genel Ayarlar</button>
+        <button class="sidebar-btn" data-tab="projects">Projeler</button>
+        <button class="sidebar-btn" data-tab="blogs">Bloglar</button>
+      </nav>
+      <button id="logout-btn" class="btn btn--ghost" style="margin-top: auto;">Çıkış Yap</button>
+    </aside>
+
+    <main class="admin-main">
+      <!-- SETTINGS TAB -->
+      <section id="tab-settings" class="tab-content active">
+        <h2>Genel Ayarlar & SEO</h2>
+        <div class="admin-panel-card">
+          <h3>İletişim & Genel Site SEO</h3>
+          <form id="settings-form" class="form-group admin-form">
+            <label class="form-label">Site SEO Başlığı (Meta Title)</label>
+            <input type="text" id="setting-meta-title" class="form-input" placeholder="Örn: FUUR STUDIO - Dijital Ajans">
+            
+            <label class="form-label" style="margin-top: var(--space-4);">Site SEO Açıklaması (Meta Description)</label>
+            <textarea id="setting-meta-desc" class="form-textarea" placeholder="Google'da görünecek özet site açıklaması"></textarea>
+
+            <label class="form-label" style="margin-top: var(--space-4);">WhatsApp Numarası (Örn: 905448508960)</label>
+            <input type="text" id="setting-whatsapp" class="form-input">
+            
+            <label class="form-label" style="margin-top: var(--space-4);">E-Posta Adresi</label>
+            <input type="email" id="setting-email" class="form-input">
+            
+            <button type="submit" class="btn btn--primary" style="margin-top: var(--space-6);">Ayarları Kaydet</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- PROJECTS TAB -->
+      <section id="tab-projects" class="tab-content hidden">
+        <h2>Projeler</h2>
+        <div class="admin-panel-card">
+          <h3>Yeni Proje Ekle</h3>
+          <form id="add-project-form" class="form-group admin-form">
+            <input type="text" id="project-title" class="form-input" placeholder="Proje Adı" required>
+            <select id="project-category" class="form-select" required>
+              <option value="web">Web Sitesi</option>
+              <option value="ecommerce">E-Ticaret</option>
+              <option value="mobile">Mobil Uygulama</option>
+              <option value="ai">AI Çözümleri</option>
+            </select>
+            <textarea id="project-description" class="form-textarea" style="min-height: 80px;" placeholder="Açıklama" required></textarea>
+            <input type="file" id="project-image" class="form-input" accept="image/*" required>
+            
+            <h4 style="margin-top: var(--space-4); color: var(--color-accent);">SEO Ayarları</h4>
+            <input type="text" id="project-meta-title" class="form-input" placeholder="Google Başlığı (İsteğe Bağlı)">
+            <textarea id="project-meta-desc" class="form-textarea" placeholder="Google Açıklaması (İsteğe Bağlı)"></textarea>
+
+            <button type="submit" class="btn btn--primary">Projeyi Ekle</button>
+          </form>
+        </div>
+
+        <div class="admin-panel-card" style="margin-top: var(--space-8);">
+          <h3>Mevcut Projeler</h3>
+          <div id="project-list" class="admin-list"></div>
+        </div>
+      </section>
+
+      <!-- BLOGS TAB -->
+      <section id="tab-blogs" class="tab-content hidden">
+        <h2>Blog Yazıları</h2>
+        <div class="admin-panel-card">
+          <h3>Yeni Yazı Ekle</h3>
+          <form id="add-blog-form" class="form-group admin-form">
+            <input type="text" id="blog-title" class="form-input" placeholder="Yazı Başlığı" required>
+            <input type="text" id="blog-category" class="form-input" placeholder="Kategori" required>
+            <input type="date" id="blog-date" class="form-input" required>
+            <textarea id="blog-excerpt" class="form-textarea" placeholder="Kısa Özet" required></textarea>
+            <input type="file" id="blog-image" class="form-input" accept="image/*" required>
+
+            <h4 style="margin-top: var(--space-4); color: var(--color-accent);">SEO Ayarları</h4>
+            <input type="text" id="blog-meta-title" class="form-input" placeholder="Google Başlığı (İsteğe Bağlı)">
+            <textarea id="blog-meta-desc" class="form-textarea" placeholder="Google Açıklaması (İsteğe Bağlı)"></textarea>
+
+            <button type="submit" class="btn btn--primary">Yazıyı Ekle</button>
+          </form>
+        </div>
+
+        <div class="admin-panel-card" style="margin-top: var(--space-8);">
+          <h3>Mevcut Yazılar</h3>
+          <div id="blog-list" class="admin-list"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
