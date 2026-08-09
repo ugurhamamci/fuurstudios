@@ -493,7 +493,7 @@ export default function AdminPage() {
                     {editingProjectId ? "Projeyi GÃ¼ncelle" : "Projeyi YayÄ±na Al"}
                   </button>
                   {editingProjectId && (
-                    <button type="button" className="glass-btn" className="glass-btn glass-btn-outline" onClick={cancelEditingProject}>
+                    <button type="button" className="glass-btn glass-btn-outline" onClick={cancelEditingProject}>
                       Ä°ptal
                     </button>
                   )}
@@ -635,7 +635,7 @@ export default function AdminPage() {
                     {editingAdminId ? "YÃ¶neticiyi GÃ¼ncelle" : "YÃ¶netici Ekle"}
                   </button>
                   {editingAdminId && (
-                    <button type="button" className="glass-btn" className="glass-btn glass-btn-outline" onClick={cancelEditingAdmin}>
+                    <button type="button" className="glass-btn glass-btn-outline" onClick={cancelEditingAdmin}>
                       Ä°ptal
                     </button>
                   )}
