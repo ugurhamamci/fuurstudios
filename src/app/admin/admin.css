@@ -424,6 +424,49 @@ textarea.glass-input {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23000000'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
 }
 
+/* CONFIRM DIALOG */
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  animation: overlayIn 0.2s ease;
+}
+
+.confirm-box {
+  max-width: 420px;
+  width: 100%;
+}
+
+.confirm-message {
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin: 0 0 1.75rem;
+}
+
+/* FORM IMAGE PREVIEW */
+.form-image-preview {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border-light);
+}
+
 /* RESPONSIVENESS */
 @media (max-width: 768px) {
   .admin-wrapper {

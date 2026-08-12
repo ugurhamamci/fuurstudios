@@ -1,53 +1,66 @@
 import { NextResponse } from 'next/server';
-import { run } from '@/lib/db';
-import jwt from 'jsonwebtoken';
-
-const SECRET_KEY = process.env.JWT_SECRET || 'fuur_secret_key_123';
+import { get, run } from '@/lib/db';
+import { verifyToken } from '@/lib/auth';
+import bcrypt from 'bcryptjs';
 
 export async function DELETE(req: Request, context: { params: Promise<{ id: string }> }) {
-  try {
-    const authHeader = req.headers.get('authorization');
-    if (!authHeader) return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
-    const token = authHeader.split(' ')[1];
-    jwt.verify(token, SECRET_KEY);
+  const user = verifyToken(req);
+  if (!user) return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
 
-    const params = await context.params;
-    const id = params.id;
+  try {
+    const { id } = await context.params;
 
     if (id === '1') {
       return NextResponse.json({ error: 'Ana yönetici hesabı silinemez' }, { status: 400 });
     }
+    if (Number(id) === user.id) {
+      return NextResponse.json({ error: 'Kendi hesabınızı silemezsiniz' }, { status: 400 });
+    }
 
-    await run('DELETE FROM admins WHERE id = ?', [id]);
+    const result = await run('DELETE FROM admins WHERE id = ?', [id]);
+    if (result.changes === 0) {
+      return NextResponse.json({ error: 'Yönetici bulunamadı' }, { status: 404 });
+    }
+
     return NextResponse.json({ message: 'Yönetici silindi' });
-  } catch (error) {
+  } catch (err: any) {
     return NextResponse.json({ error: 'Hata oluştu' }, { status: 500 });
   }
 }
 
 export async function PUT(req: Request, context: { params: Promise<{ id: string }> }) {
+  const user = verifyToken(req);
+  if (!user) return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
+
   try {
-    const authHeader = req.headers.get('authorization');
-    if (!authHeader) return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
-    const token = authHeader.split(' ')[1];
-    jwt.verify(token, SECRET_KEY);
-
-    const params = await context.params;
-    const id = params.id;
-
+    const { id } = await context.params;
     const { username, password } = await req.json();
-    if (!username) return NextResponse.json({ error: 'Kullanıcı adı gerekli' }, { status: 400 });
 
+    if (!username) {
+      return NextResponse.json({ error: 'Kullanıcı adı gerekli' }, { status: 400 });
+    }
+    if (password && password.length < 8) {
+      return NextResponse.json({ error: 'Şifre en az 8 karakter olmalı' }, { status: 400 });
+    }
+
+    const existing = await get('SELECT id FROM admins WHERE id = ?', [id]);
+    if (!existing) {
+      return NextResponse.json({ error: 'Yönetici bulunamadı' }, { status: 404 });
+    }
+
+    // Şifre boş bırakıldıysa mevcut şifre korunur.
     if (password) {
-      const salt = require('bcryptjs').genSaltSync(10);
-      const hash = require('bcryptjs').hashSync(password, salt);
+      const hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
       await run('UPDATE admins SET username = ?, password = ? WHERE id = ?', [username, hash, id]);
     } else {
       await run('UPDATE admins SET username = ? WHERE id = ?', [username, id]);
     }
 
     return NextResponse.json({ message: 'Yönetici güncellendi' });
-  } catch (error) {
+  } catch (err: any) {
+    if (String(err?.message).includes('UNIQUE')) {
+      return NextResponse.json({ error: 'Bu kullanıcı adı zaten kullanılıyor' }, { status: 409 });
+    }
     return NextResponse.json({ error: 'Hata oluştu' }, { status: 500 });
   }
 }

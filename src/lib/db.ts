@@ -9,6 +9,21 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
+/** Panelden yönetilen ayarların varsayılan değerleri. */
+export const DEFAULT_SETTINGS: Record<string, string> = {
+  whatsappNumber: '905448508960',
+  email: 'info@fuurstudio.com',
+  site_meta_title: 'FUUR STUDIO - Dijital Ajans',
+  site_meta_description:
+    'Dijital dönüşüm ortağınız. Yazılım, AI ve tasarım çözümleri ile markanızı bir adım öne taşıyoruz.',
+  instagram_url: 'https://www.instagram.com/fuurstudio/',
+  linkedin_url: '',
+  twitter_url: '',
+  facebook_url: '',
+  youtube_url: '',
+  github_url: '',
+};
+
 db.serialize(() => {
   // Admins Tablosu
   db.run(`CREATE TABLE IF NOT EXISTS admins (
@@ -49,27 +64,29 @@ db.serialize(() => {
     setting_value TEXT
   )`);
 
-  // Varsayılan Admin
-  db.get(`SELECT id FROM admins WHERE username = ?`, ['ugurhamamci'], (err, row) => {
-    if (!row) {
-      const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync('Ugur145360*', salt);
-      db.run(`INSERT INTO admins (username, password) VALUES (?, ?)`, ['ugurhamamci', hash]);
-    }
-  });
-
-  // Varsayılan Ayarlar
-  const defaultSettings = [
-    ['whatsappNumber', '905448508960'],
-    ['email', 'info@fuurstudio.com'],
-    ['site_meta_title', 'FUUR STUDIO - Dijital Ajans'],
-    ['site_meta_description', 'Dijital dönüşüm ortağınız. Yazılım, AI ve tasarım çözümleri ile markanızı bir adım öne taşıyoruz.']
-  ];
-
-  defaultSettings.forEach(([key, value]) => {
-    db.get(`SELECT setting_key FROM settings WHERE setting_key = ?`, [key], (err, row) => {
-      if (!row) db.run(`INSERT INTO settings (setting_key, setting_value) VALUES (?, ?)`, [key, value]);
+  // Varsayılan Admin — parola yalnızca ortam değişkeninden okunur, koda gömülmez.
+  const seedUser = process.env.ADMIN_DEFAULT_USER;
+  const seedPass = process.env.ADMIN_DEFAULT_PASSWORD;
+  if (seedUser && seedPass) {
+    db.get(`SELECT id FROM admins WHERE username = ?`, [seedUser], (err, row) => {
+      if (!err && !row) {
+        const hash = bcrypt.hashSync(seedPass, bcrypt.genSaltSync(10));
+        db.run(`INSERT INTO admins (username, password) VALUES (?, ?)`, [seedUser, hash]);
+      }
     });
+  } else {
+    db.get(`SELECT COUNT(*) AS count FROM admins`, (err, row: any) => {
+      if (!err && row?.count === 0) {
+        console.warn(
+          'Yönetici tablosu boş. İlk yöneticiyi oluşturmak için ADMIN_DEFAULT_USER ve ADMIN_DEFAULT_PASSWORD ortam değişkenlerini tanımlayın.'
+        );
+      }
+    });
+  }
+
+  // Varsayılan Ayarlar — var olan değerleri ezmez.
+  Object.entries(DEFAULT_SETTINGS).forEach(([key, value]) => {
+    db.run(`INSERT OR IGNORE INTO settings (setting_key, setting_value) VALUES (?, ?)`, [key, value]);
   });
 });
 
@@ -99,5 +116,26 @@ export const get = (sql: string, params: any[] = []): Promise<any> => {
     });
   });
 };
+
+/** Tüm ayarları anahtar/değer nesnesi olarak döner; eksik anahtarlar varsayılanla tamamlanır. */
+export const getSettings = async (): Promise<Record<string, string>> => {
+  const rows = await query(`SELECT setting_key, setting_value FROM settings`);
+  const settings: Record<string, string> = { ...DEFAULT_SETTINGS };
+  rows.forEach((r: any) => {
+    if (r.setting_value !== null) settings[r.setting_key] = r.setting_value;
+  });
+  return settings;
+};
+
+/**
+ * Ayarı ekler ya da günceller. Düz UPDATE, satır henüz yoksa sessizce hiçbir
+ * şey yapmadığı için yeni ayar anahtarları kaydedilmiyordu.
+ */
+export const upsertSetting = (key: string, value: string): Promise<any> =>
+  run(
+    `INSERT INTO settings (setting_key, setting_value) VALUES (?, ?)
+     ON CONFLICT(setting_key) DO UPDATE SET setting_value = excluded.setting_value`,
+    [key, value]
+  );
 
 export default db;
