@@ -64,6 +64,15 @@ db.serialize(() => {
     setting_value TEXT
   )`);
 
+  // Başarısız Giriş Denemeleri — kaba kuvvet saldırısını yavaşlatmak için.
+  // Bellekte tutmak yerine tabloda: sunucu yeniden başlasa da sayaç kalıyor.
+  db.run(`CREATE TABLE IF NOT EXISTS login_attempts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    identifier TEXT NOT NULL,
+    attempted_at INTEGER NOT NULL
+  )`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_login_attempts ON login_attempts (identifier, attempted_at)`);
+
   // Ekip Üyeleri Tablosu — her üyenin kendi sosyal medya hesapları var.
   db.run(`CREATE TABLE IF NOT EXISTS team_members (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
