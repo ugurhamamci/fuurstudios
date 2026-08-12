@@ -8,7 +8,9 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: var(--z-sticky);
+  /* Mobil menü artık nav'ın kardeşi; hamburger/kapat butonunun menünün
+     üstünde kalması için nav, menüden (--z-overlay) yukarıda olmalı. */
+  z-index: var(--z-modal);
   padding: var(--space-5) 0;
   background: transparent;
   transition: all var(--duration-base) var(--ease-out);
@@ -93,7 +95,6 @@
   align-items: center;
   gap: var(--space-3);
   position: relative;
-  z-index: 9999; /* Ensure clicks are never blocked */
 }
 
 /* Mobile Menu */
@@ -735,8 +736,21 @@
 
 .team__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* Üye sayısı panelden değiştiği için sabit 4 kolon yerine esnek kolonlar:
+     iki ortak varken kartlar gereksiz yere gerilmiyor. */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--space-6);
+  justify-content: center;
+}
+
+.team__avatar--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5rem;
+  font-family: var(--font-heading);
 }
 
 .team__member {
@@ -798,6 +812,14 @@
 .team__member:hover .team__socials {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Dokunmatik cihazlarda hover olmadığı için sosyal hesaplar hiç görünmüyordu. */
+@media (hover: none) {
+  .team__socials {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 1024px) {

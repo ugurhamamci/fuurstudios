@@ -51,14 +51,16 @@ export const buildSocialLinks = (settings: Record<string, string>): SocialLink[]
 export default function SocialLinks({
   links,
   style,
+  className = 'social-links',
 }: {
   links: SocialLink[];
   style?: CSSProperties;
+  className?: string;
 }) {
   if (links.length === 0) return null;
 
   return (
-    <div className="social-links" style={style}>
+    <div className={className} style={style}>
       {links.map((link) => (
         <a
           key={link.key}

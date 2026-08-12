@@ -29,6 +29,28 @@ const BLOG_CATEGORIES = [
   { value: "is-dunyasi", label: "İş Dünyası" },
 ];
 
+/** Ekip üyelerinin kişisel hesapları — şirket hesaplarından ayrı. */
+const TEAM_SOCIAL_FIELDS: Social[] = [
+  { key: "linkedin_url", label: "LinkedIn", placeholder: "https://linkedin.com/in/kullanici" },
+  { key: "instagram_url", label: "Instagram", placeholder: "https://instagram.com/kullanici" },
+  { key: "github_url", label: "GitHub", placeholder: "https://github.com/kullanici" },
+  { key: "twitter_url", label: "X (Twitter)", placeholder: "https://x.com/kullanici" },
+];
+
+const emptyTeamForm = {
+  name: "",
+  role: "",
+  bio: "",
+  initials: "",
+  accent_color: "#C8102E",
+  whatsapp: "",
+  sort_order: "0",
+  linkedin_url: "",
+  instagram_url: "",
+  github_url: "",
+  twitter_url: "",
+};
+
 const emptyProjectForm = {
   title: "",
   category: "web",
@@ -61,6 +83,13 @@ export default function AdminPage() {
   const [projects, setProjects] = useState<any[]>([]);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [admins, setAdmins] = useState<any[]>([]);
+  const [team, setTeam] = useState<any[]>([]);
+
+  // Ekip formu
+  const [editingTeamId, setEditingTeamId] = useState<number | null>(null);
+  const [teamForm, setTeamForm] = useState({ ...emptyTeamForm });
+  const [teamImage, setTeamImage] = useState<File | null>(null);
+  const [teamCurrentImage, setTeamCurrentImage] = useState<string>("");
 
   const [confirmState, setConfirmState] = useState<{ message: string; onConfirm: () => void } | null>(null);
 
@@ -87,6 +116,7 @@ export default function AdminPage() {
     setProjects([]);
     setBlogs([]);
     setAdmins([]);
+    setTeam([]);
     setSettings({});
   }, []);
 
@@ -112,17 +142,19 @@ export default function AdminPage() {
     async (activeToken: string) => {
       setLoading(true);
       try {
-        const [resSettings, resProjects, resBlogs, resAdmins] = await Promise.all([
+        const [resSettings, resProjects, resBlogs, resAdmins, resTeam] = await Promise.all([
           authFetch("/api/settings", {}, activeToken),
           fetch("/api/projects"),
           fetch("/api/blogs"),
           authFetch("/api/admins", {}, activeToken),
+          fetch("/api/team"),
         ]);
 
         if (resSettings.ok) setSettings(await resSettings.json());
         if (resProjects.ok) setProjects(await resProjects.json());
         if (resBlogs.ok) setBlogs(await resBlogs.json());
         if (resAdmins.ok) setAdmins(await resAdmins.json());
+        if (resTeam.ok) setTeam(await resTeam.json());
       } catch (e: any) {
         if (e?.message !== "unauthorized") toast.error("Veriler yüklenemedi.");
       } finally {
@@ -345,6 +377,77 @@ export default function AdminPage() {
       }
     });
 
+  // ---- Ekip ----
+
+  const startEditingTeam = (m: any) => {
+    setEditingTeamId(m.id);
+    setTeamForm({
+      name: m.name || "",
+      role: m.role || "",
+      bio: m.bio || "",
+      initials: m.initials || "",
+      accent_color: m.accent_color || "#C8102E",
+      whatsapp: m.whatsapp || "",
+      sort_order: String(m.sort_order ?? 0),
+      linkedin_url: m.linkedin_url || "",
+      instagram_url: m.instagram_url || "",
+      github_url: m.github_url || "",
+      twitter_url: m.twitter_url || "",
+    });
+    setTeamImage(null);
+    setTeamCurrentImage(m.image || "");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const cancelEditingTeam = () => {
+    setEditingTeamId(null);
+    setTeamForm({ ...emptyTeamForm });
+    setTeamImage(null);
+    setTeamCurrentImage("");
+  };
+
+  const handleTeamSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    Object.entries(teamForm).forEach(([key, value]) => formData.append(key, value));
+    if (teamImage) formData.append("image", teamImage);
+
+    try {
+      const res = await authFetch(editingTeamId ? `/api/team/${editingTeamId}` : "/api/team", {
+        method: editingTeamId ? "PUT" : "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (res.ok) {
+        toast.success(editingTeamId ? "Ekip üyesi güncellendi." : "Ekip üyesi eklendi.");
+        cancelEditingTeam();
+        if (token) loadData(token);
+      } else {
+        toast.error(data.error || "Kaydedilemedi.");
+      }
+    } catch (e: any) {
+      if (e?.message !== "unauthorized") toast.error("Kaydedilemedi.");
+    }
+  };
+
+  const deleteTeamMember = (id: number, name: string) =>
+    askConfirm(`"${name}" adlı ekip üyesini silmek istediğinize emin misiniz?`, async () => {
+      try {
+        const res = await authFetch(`/api/team/${id}`, { method: "DELETE" });
+        const data = await res.json();
+        if (res.ok) {
+          toast.success("Ekip üyesi silindi.");
+          if (editingTeamId === id) cancelEditingTeam();
+          if (token) loadData(token);
+        } else {
+          toast.error(data.error || "Silinemedi.");
+        }
+      } catch (e: any) {
+        if (e?.message !== "unauthorized") toast.error("Silinemedi.");
+      }
+    });
+
   // ---- Yöneticiler ----
 
   const startEditingAdmin = (admin: any) => {
@@ -533,6 +636,13 @@ export default function AdminPage() {
           >
             <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
             Bloglar
+          </button>
+          <button
+            className={`nav-item ${activeTab === "team" ? "active" : ""}`}
+            onClick={() => setActiveTab("team")}
+          >
+            <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
+            Ekip
           </button>
           <button
             className={`nav-item ${activeTab === "admins" ? "active" : ""}`}
@@ -988,6 +1098,224 @@ export default function AdminPage() {
                       className="glass-btn-danger"
                       style={{ flex: 1, padding: "0.5rem", fontSize: "0.9rem" }}
                       onClick={() => deleteBlog(b.id)}
+                    >
+                      Sil
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === "team" && (
+          <div>
+            <div className="admin-header">
+              <h1 className="admin-title">Ekip Yönetimi</h1>
+              <p className="admin-subtitle">
+                Ana sayfadaki Ekibimiz bölümünü ve her üyenin kendi sosyal medya hesaplarını buradan yönetin.
+              </p>
+            </div>
+
+            <div className="glass-panel" style={{ marginBottom: "3rem" }}>
+              <form onSubmit={handleTeamSubmit}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+                  <div className="glass-form-group">
+                    <label className="glass-label">İsim Soyisim</label>
+                    <input
+                      type="text"
+                      className="glass-input"
+                      placeholder="Uğur Hamamcı"
+                      value={teamForm.name}
+                      onChange={(e) => setTeamForm({ ...teamForm, name: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="glass-form-group">
+                    <label className="glass-label">Ünvan</label>
+                    <input
+                      type="text"
+                      className="glass-input"
+                      placeholder="Kurucu Ortak"
+                      value={teamForm.role}
+                      onChange={(e) => setTeamForm({ ...teamForm, role: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                <div className="glass-form-group">
+                  <label className="glass-label">Kısa Tanıtım</label>
+                  <textarea
+                    className="glass-input"
+                    placeholder="Uzmanlık alanınızı bir cümleyle anlatın…"
+                    value={teamForm.bio}
+                    onChange={(e) => setTeamForm({ ...teamForm, bio: e.target.value })}
+                  ></textarea>
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.5rem" }}>
+                  <div className="glass-form-group">
+                    <label className="glass-label">Baş Harfler</label>
+                    <input
+                      type="text"
+                      className="glass-input"
+                      placeholder="Boş bırakılırsa isimden üretilir"
+                      maxLength={3}
+                      value={teamForm.initials}
+                      onChange={(e) => setTeamForm({ ...teamForm, initials: e.target.value })}
+                    />
+                  </div>
+                  <div className="glass-form-group">
+                    <label className="glass-label">Avatar Rengi</label>
+                    <input
+                      type="color"
+                      className="glass-input"
+                      style={{ height: "48px", padding: "0.25rem" }}
+                      value={teamForm.accent_color}
+                      onChange={(e) => setTeamForm({ ...teamForm, accent_color: e.target.value })}
+                    />
+                  </div>
+                  <div className="glass-form-group">
+                    <label className="glass-label">Sıra</label>
+                    <input
+                      type="number"
+                      className="glass-input"
+                      min={0}
+                      value={teamForm.sort_order}
+                      onChange={(e) => setTeamForm({ ...teamForm, sort_order: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                <div className="glass-form-group">
+                  <label className="glass-label">
+                    Fotoğraf (isteğe bağlı{editingTeamId ? ", değiştirmeyecekseniz boş bırakın" : ""})
+                  </label>
+                  {editingTeamId && teamCurrentImage && (
+                    <img src={teamCurrentImage} alt="Mevcut fotoğraf" className="form-image-preview" />
+                  )}
+                  <div className="file-upload-wrapper">
+                    <input
+                      type="file"
+                      className="file-upload-input"
+                      accept="image/*"
+                      onChange={(e) => setTeamImage(e.target.files?.[0] || null)}
+                    />
+                    <div className="file-upload-text">
+                      <svg width="32" height="32" fill="none" stroke="#C8102E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                      {teamImage ? teamImage.name : "Fotoğraf yüklemezseniz baş harfler gösterilir"}
+                    </div>
+                  </div>
+                </div>
+
+                <h3 style={{ fontSize: "1.2rem", fontWeight: 600, color: "#C8102E", marginTop: "1rem", marginBottom: "0.5rem" }}>
+                  Kişisel Sosyal Medya Hesapları
+                </h3>
+                <p style={{ color: "var(--muted-color)", fontSize: "0.9rem", marginBottom: "1.5rem" }}>
+                  Bunlar bu kişiye ait hesaplar; her ortak kendi hesabını girebilir. Şirketin ortak
+                  hesapları Genel Ayarlar bölümünde yönetilir. Boş bırakılanlar gösterilmez.
+                </p>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+                  {TEAM_SOCIAL_FIELDS.map((field) => (
+                    <div className="glass-form-group" key={field.key}>
+                      <label className="glass-label">{field.label}</label>
+                      <input
+                        type="url"
+                        className="glass-input"
+                        placeholder={field.placeholder}
+                        value={(teamForm as any)[field.key] || ""}
+                        onChange={(e) => setTeamForm({ ...teamForm, [field.key]: e.target.value })}
+                      />
+                    </div>
+                  ))}
+                  <div className="glass-form-group">
+                    <label className="glass-label">WhatsApp Numarası</label>
+                    <input
+                      type="text"
+                      className="glass-input"
+                      placeholder="905448508960"
+                      value={teamForm.whatsapp}
+                      onChange={(e) => setTeamForm({ ...teamForm, whatsapp: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+                  <button type="submit" className="glass-btn">
+                    {editingTeamId ? "Üyeyi Güncelle" : "Ekip Üyesi Ekle"}
+                  </button>
+                  {editingTeamId && (
+                    <button type="button" className="glass-btn glass-btn-outline" onClick={cancelEditingTeam}>
+                      İptal
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
+
+            <h2 style={{ fontSize: "1.8rem", fontWeight: 700, marginBottom: "1rem" }}>Ekip Üyeleri</h2>
+            <div className="project-list-modern">
+              {team.length === 0 && (
+                <p style={{ color: "var(--muted-color-light)" }}>Henüz ekip üyesi eklenmedi.</p>
+              )}
+              {team.map((m) => (
+                <div key={m.id} className="project-card-modern" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                    {m.image ? (
+                      <img
+                        src={m.image}
+                        alt={m.name}
+                        style={{ width: "56px", height: "56px", borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          width: "56px",
+                          height: "56px",
+                          borderRadius: "50%",
+                          flexShrink: 0,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontWeight: 700,
+                          color: "#fff",
+                          background: `linear-gradient(135deg, ${m.accent_color || "#C8102E"} 0%, #1a1a1a 100%)`,
+                        }}
+                      >
+                        {m.initials}
+                      </div>
+                    )}
+                    <div>
+                      <h4 className="project-card-title" style={{ margin: 0 }}>{m.name}</h4>
+                      <p className="project-card-cat" style={{ margin: 0, marginTop: "2px" }}>{m.role || "—"}</p>
+                    </div>
+                  </div>
+
+                  <p style={{ fontSize: "0.85rem", color: "var(--muted-color)", margin: 0 }}>
+                    {[
+                      m.linkedin_url && "LinkedIn",
+                      m.instagram_url && "Instagram",
+                      m.github_url && "GitHub",
+                      m.twitter_url && "X",
+                      m.whatsapp && "WhatsApp",
+                    ]
+                      .filter(Boolean)
+                      .join(" · ") || "Sosyal medya hesabı eklenmedi"}
+                  </p>
+
+                  <div className="project-card-actions" style={{ display: "flex", gap: "0.5rem" }}>
+                    <button
+                      className="glass-btn"
+                      style={{ flex: 1, padding: "0.5rem", fontSize: "0.9rem" }}
+                      onClick={() => startEditingTeam(m)}
+                    >
+                      Düzenle
+                    </button>
+                    <button
+                      className="glass-btn-danger"
+                      style={{ flex: 1, padding: "0.5rem", fontSize: "0.9rem" }}
+                      onClick={() => deleteTeamMember(m.id, m.name)}
                     >
                       Sil
                     </button>

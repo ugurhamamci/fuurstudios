@@ -64,6 +64,43 @@ db.serialize(() => {
     setting_value TEXT
   )`);
 
+  // Ekip Üyeleri Tablosu — her üyenin kendi sosyal medya hesapları var.
+  db.run(`CREATE TABLE IF NOT EXISTS team_members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    role TEXT,
+    bio TEXT,
+    initials TEXT,
+    accent_color TEXT,
+    image TEXT,
+    linkedin_url TEXT,
+    instagram_url TEXT,
+    github_url TEXT,
+    twitter_url TEXT,
+    whatsapp TEXT,
+    sort_order INTEGER DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  )`);
+
+  // Ekip tablosu boşsa siteyi boş bırakmamak için mevcut kartlarla doldur.
+  // Panelden düzenlenebilir ve silinebilir.
+  db.get(`SELECT COUNT(*) AS count FROM team_members`, (err, row: any) => {
+    if (err || row?.count > 0) return;
+    const seed: [string, string, string, string, string, string, string][] = [
+      ['Uğur Yılmaz', 'Kurucu & Full-Stack Developer', 'Dijital çözümler ve AI entegrasyonları konusunda uzman.', 'UY', '#C8102E', 'https://www.instagram.com/fuurstudio/', ''],
+      ['Elif Karaca', 'UI/UX Tasarımcı', 'Kullanıcı odaklı, estetik ve işlevsel arayüzler tasarlıyor.', 'EK', '#667eea', '', ''],
+      ['Burak Demir', 'Backend Developer', 'Ölçeklenebilir ve güvenli sunucu mimarileri kuruyor.', 'BD', '#2dd4bf', '', ''],
+      ['Selin Aydın', 'Dijital Pazarlama Uzmanı', 'Meta Ads ve sosyal medya stratejileri ile büyüme sağlıyor.', 'SA', '#f59e0b', '', ''],
+    ];
+    seed.forEach(([name, role, bio, initials, color, instagram, linkedin], i) => {
+      db.run(
+        `INSERT INTO team_members (name, role, bio, initials, accent_color, instagram_url, linkedin_url, sort_order)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [name, role, bio, initials, color, instagram, linkedin, i]
+      );
+    });
+  });
+
   // Varsayılan Admin — parola yalnızca ortam değişkeninden okunur, koda gömülmez.
   const seedUser = process.env.ADMIN_DEFAULT_USER;
   const seedPass = process.env.ADMIN_DEFAULT_PASSWORD;
