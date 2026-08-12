@@ -1221,3 +1221,84 @@
     text-align: center;
   }
 }
+
+/* ==========================================================================
+   QUOTE / TEKLIF ALIN
+   ========================================================================== */
+.quote {
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+}
+
+.quote__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.quote__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.quote__intro p {
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 460px;
+}
+
+.quote__benefits {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.quote__benefit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+}
+
+.quote__benefit svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--brand-red);
+}
+
+.quote__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-10);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.quote__form-note {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+}
+
+@media (max-width: 968px) {
+  .quote__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+}
+
+@media (max-width: 640px) {
+  .quote__form {
+    padding: var(--space-6);
+  }
+}

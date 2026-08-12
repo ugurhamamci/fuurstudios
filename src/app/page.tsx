@@ -126,7 +126,7 @@ export default async function Home() {
         </button>
 
         
-        <a href="#contact" className="btn btn--primary btn--sm hide-mobile" data-i18n="nav.cta">Projenizi Görüşelim</a>
+        <a href="#quote" className="btn btn--primary btn--sm hide-mobile" data-i18n="nav.cta">Teklif Alın</a>
 
         
         <button className="nav__hamburger" aria-label="Menü">
@@ -151,7 +151,7 @@ export default async function Home() {
           <button className="lang-toggle__option active" data-lang="tr">TR</button>
           <button className="lang-toggle__option" data-lang="en">EN</button>
         </div>
-        <a href="#contact" className="btn btn--primary btn--sm" data-i18n="nav.cta">Projenizi Görüşelim</a>
+        <a href="#quote" className="btn btn--primary btn--sm" data-i18n="nav.cta">Teklif Alın</a>
       </div>
     </div>
   </nav>
@@ -172,7 +172,7 @@ export default async function Home() {
         </p>
         <div className="hero__actions">
           <a href="#services" className="btn btn--secondary btn--lg" data-i18n="hero.cta.primary">Hizmetlerimizi İnceleyin</a>
-          <a href="#contact" className="btn btn--ghost btn--lg" data-i18n="hero.cta.secondary">Bizimle İletişime Geçin</a>
+          <a href="#quote" className="btn btn--ghost btn--lg" data-i18n="hero.cta.secondary">Ücretsiz Teklif Alın</a>
         </div>
       </div>
 
@@ -597,7 +597,104 @@ export default async function Home() {
   </section>
 
 
-  
+
+  <section className="quote section" id="quote">
+    <div className="container">
+      <div className="quote__grid">
+
+
+        <div className="quote__intro reveal">
+          <span className="overline" data-i18n="quote.overline">Ücretsiz ve Bağlayıcı Değil</span>
+          <h2 className="heading-lg" data-i18n="quote.title">TEKLİF ALIN</h2>
+          <p className="body-base" data-i18n="quote.description">
+            Projenizin kapsamını birkaç soruyla netleştirip size 24 saat içinde şeffaf bir fiyat ve zaman planı sunuyoruz.
+          </p>
+
+          <ul className="quote__benefits">
+            <li className="quote__benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span data-i18n="quote.benefit.1">24 saat içinde geri dönüş</span>
+            </li>
+            <li className="quote__benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span data-i18n="quote.benefit.2">Sabit fiyat, sürpriz maliyet yok</span>
+            </li>
+            <li className="quote__benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 1 1-3.5-7.1L21 3v9z"/></svg>
+              <span data-i18n="quote.benefit.3">Ücretsiz ön görüşme</span>
+            </li>
+            <li className="quote__benefit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span data-i18n="quote.benefit.4">Bilgileriniz gizli tutulur</span>
+            </li>
+          </ul>
+        </div>
+
+
+        <form className="quote__form reveal-right" id="quote-form">
+          <div className="contact__form-row">
+            <div className="form-group">
+              <label className="form-label" htmlFor="quote-name" data-i18n="quote.form.name">Adınız Soyadınız</label>
+              <input className="form-input" type="text" id="quote-name" required data-i18n-placeholder="quote.form.name" placeholder="Adınız Soyadınız" />
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="quote-phone" data-i18n="quote.form.phone">Telefon Numaranız</label>
+              <input className="form-input" type="tel" id="quote-phone" required data-i18n-placeholder="quote.form.phone" placeholder="05XX XXX XX XX" />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label" htmlFor="quote-service" data-i18n="quote.form.service">İhtiyacınız Olan Hizmet</label>
+            <select className="form-select" id="quote-service">
+              <option value="Kurumsal Web Sitesi" data-i18n="quote.form.service.1">Kurumsal Web Sitesi</option>
+              <option value="E-Ticaret Çözümü" data-i18n="quote.form.service.2">E-Ticaret Çözümü</option>
+              <option value="Mobil Uygulama" data-i18n="quote.form.service.3">Mobil Uygulama</option>
+              <option value="Yapay Zeka & Otomasyon" data-i18n="quote.form.service.4">Yapay Zeka &amp; Otomasyon</option>
+              <option value="Sosyal Medya Yönetimi" data-i18n="quote.form.service.5">Sosyal Medya Yönetimi</option>
+              <option value="Diğer" data-i18n="quote.form.service.6">Diğer</option>
+            </select>
+          </div>
+
+          <div className="contact__form-row">
+            <div className="form-group">
+              <label className="form-label" htmlFor="quote-budget" data-i18n="quote.form.budget">Bütçe Aralığınız</label>
+              <select className="form-select" id="quote-budget">
+                <option value="Henüz belirlemedim" data-i18n="quote.form.budget.0">Henüz belirlemedim</option>
+                <option value="25.000 TL altı" data-i18n="quote.form.budget.1">25.000 TL altı</option>
+                <option value="25.000 - 50.000 TL" data-i18n="quote.form.budget.2">25.000 - 50.000 TL</option>
+                <option value="50.000 - 100.000 TL" data-i18n="quote.form.budget.3">50.000 - 100.000 TL</option>
+                <option value="100.000 TL ve üzeri" data-i18n="quote.form.budget.4">100.000 TL ve üzeri</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="quote-timeline" data-i18n="quote.form.timeline">Ne Zaman Başlamak İstiyorsunuz?</label>
+              <select className="form-select" id="quote-timeline">
+                <option value="En kısa sürede" data-i18n="quote.form.timeline.1">En kısa sürede</option>
+                <option value="1 ay içinde" data-i18n="quote.form.timeline.2">1 ay içinde</option>
+                <option value="1-3 ay içinde" data-i18n="quote.form.timeline.3">1-3 ay içinde</option>
+                <option value="Tarih esnek" data-i18n="quote.form.timeline.4">Tarih esnek</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label" htmlFor="quote-details" data-i18n="quote.form.details">Projeniz Hakkında (İsteğe Bağlı)</label>
+            <textarea className="form-textarea" id="quote-details" data-i18n-placeholder="quote.form.details.placeholder" placeholder="Kısaca ne yapmak istediğinizi anlatın..."></textarea>
+          </div>
+
+          <button type="submit" className="btn btn--primary btn--lg" data-i18n="quote.form.submit">
+            WhatsApp ile Teklif Al
+          </button>
+          <p className="quote__form-note" data-i18n="quote.form.note">
+            Formu gönderdiğinizde bilgileriniz hazır bir WhatsApp mesajına dönüşür; göndermeden önce kontrol edebilirsiniz.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+
   <section className="blog section" id="blog">
     <div className="container">
       <div className="section-header section-header--split reveal">

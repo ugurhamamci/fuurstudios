@@ -20,6 +20,9 @@ function runInit() {
 
   // 🛠 Contact Form (WhatsApp) 🛠
   initContactForm();
+
+  // 🛠 Quote Form (WhatsApp) 🛠
+  initQuoteForm();
 }
 
 if (document.readyState === 'loading') {
@@ -98,6 +101,42 @@ function initContactForm() {
     const waNumber = window.waNumber || '905448508960';
     const waUrl = `https://wa.me/${waNumber}?text=${waMessage}`;
     window.open(waUrl, '_blank');
+  });
+}
+
+// ── Quote Form → WhatsApp ──
+function initQuoteForm() {
+  const form = document.getElementById('quote-form');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = form.querySelector('#quote-name')?.value?.trim() || '';
+    const phone = form.querySelector('#quote-phone')?.value?.trim() || '';
+    const service = form.querySelector('#quote-service')?.value || '';
+    const budget = form.querySelector('#quote-budget')?.value || '';
+    const timeline = form.querySelector('#quote-timeline')?.value || '';
+    const details = form.querySelector('#quote-details')?.value?.trim() || '';
+
+    if (!name || !phone) {
+      highlightEmptyFields(form);
+      return;
+    }
+
+    const lines = [
+      'Merhaba FUUR STUDIO! 👋 Teklif almak istiyorum.',
+      '',
+      `📌 *İsim:* ${name}`,
+      `📱 *Telefon:* ${phone}`,
+      `🔧 *Hizmet:* ${service || 'Belirtilmedi'}`,
+      `💰 *Bütçe:* ${budget || 'Belirtilmedi'}`,
+      `🗓 *Başlangıç:* ${timeline || 'Belirtilmedi'}`,
+    ];
+    if (details) lines.push(`💬 *Detay:* ${details}`);
+
+    const waNumber = window.waNumber || '905448508960';
+    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
   });
 }
 
