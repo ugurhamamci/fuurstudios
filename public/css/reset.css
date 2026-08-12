@@ -16,6 +16,12 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* .reveal-right / .reveal-left animasyonları görünür olana kadar öğeleri
+     translateX ile kaydırıyor ve bu, belgeyi yatayda genişletiyordu. Mobilde
+     düzen alanı içeriğe göre büyüdüğü için sabit konumlu menü de genişliyor ve
+     hamburger butonu ekranın dışına taşıyordu. `clip`, `hidden`in aksine
+     kaydırma kapsayıcısı oluşturmaz; position:sticky bozulmaz. */
+  overflow-x: clip;
 }
 
 body {

@@ -142,6 +142,8 @@
   gap: var(--space-8);
   opacity: 0;
   transition: opacity var(--duration-base) var(--ease-out);
+  overflow-y: auto;
+  padding: var(--space-6);
 }
 
 .nav__mobile-menu.open {
@@ -165,6 +167,30 @@
   .nav__links { display: none; }
   .nav__hamburger { display: flex; }
   .nav__actions .btn { display: none; }
+  /* Hamburger 1024px'te devreye giriyor ama .hide-mobile 768px'te gizliyordu;
+     arada kalan genişliklerde dil seçici hem başlıkta hem mobil menüde
+     görünüyordu. */
+  .nav__actions .lang-toggle { display: none; }
+}
+
+/* Yatay moddaki telefonlarda menü içeriği ekran yüksekliğine sığmıyor.
+   Ortalanmış bir flex kapsayıcı taşarsa üstteki bağlantılar kaydırılarak
+   erişilemez hale gelir; bu yüzden kısa ekranlarda üstten hizalayıp
+   kaydırmaya izin veriyoruz. */
+@media (max-height: 600px) {
+  .nav__mobile-menu {
+    justify-content: flex-start;
+    gap: var(--space-5);
+    padding-block: var(--space-20) var(--space-8);
+  }
+
+  .nav__mobile-menu .nav__link {
+    font-size: var(--text-lg);
+  }
+
+  .nav__mobile-actions {
+    margin-top: var(--space-5);
+  }
 }
 
 /* ── HERO ── */
@@ -186,6 +212,7 @@
 }
 
 .hero__content {
+  min-width: 0;
   position: relative;
   z-index: var(--z-base);
 }
@@ -350,6 +377,10 @@
   gap: var(--space-8);
   margin-top: var(--space-12);
   animation: slideUp 0.8s var(--ease-out) 1s both;
+  /* Grid item olduğu için min-width:auto, içindeki nowrap tech-strip'in
+     min-content genişliğini (~815px) track'e dayatıp mobilde sayfayı
+     yatay taşırıyordu. */
+  min-width: 0;
 }
 
 /* Tech Stack Strip */
