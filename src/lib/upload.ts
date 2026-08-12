@@ -3,6 +3,9 @@ import path from 'path';
 
 export class UploadError extends Error {}
 
+/** Görseller belleğe alınıp diske yazıldığı için üst sınır şart. */
+const MAX_BYTES = 5 * 1024 * 1024;
+
 /**
  * Yüklenen görseli public/uploads altına kaydeder ve public URL'ini döner.
  * Dosya yoksa ya da boşsa null döner (düzenlemede görsel zorunlu değil).
@@ -12,6 +15,12 @@ export const saveImage = async (file: File | null, prefix: string): Promise<stri
 
   if (!file.type.startsWith('image/')) {
     throw new UploadError('Sadece görsel dosyaları yüklenebilir.');
+  }
+
+  if (file.size > MAX_BYTES) {
+    throw new UploadError(
+      `Görsel çok büyük (${(file.size / 1024 / 1024).toFixed(1)} MB). En fazla ${MAX_BYTES / 1024 / 1024} MB yükleyebilirsiniz.`
+    );
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());

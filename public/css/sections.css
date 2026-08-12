@@ -628,6 +628,23 @@
   opacity: 1;
 }
 
+/* Dokunmatik cihazlarda hover olmadığı için proje adı, kategorisi ve
+   açıklaması hiç görünmüyordu; ziyaretçi etiketsiz görseller görüyordu.
+   Metin hep açıkta durduğu için gradyan, parlak görsellerde de okunabilir
+   olacak kadar koyu. */
+@media (hover: none) {
+  .portfolio__overlay {
+    opacity: 1;
+    background: linear-gradient(
+      to top,
+      rgba(10, 10, 10, 0.97) 0%,
+      rgba(10, 10, 10, 0.9) 45%,
+      rgba(10, 10, 10, 0.6) 70%,
+      rgba(10, 10, 10, 0.1) 100%
+    );
+  }
+}
+
 .portfolio__category {
   font-size: var(--text-xs);
   text-transform: uppercase;
